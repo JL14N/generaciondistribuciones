@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Distribución {{ distr.capitalize() }}</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Histograma de Frecuencias</h1>
+        
+        {% if histogram_url %}
+            <div class="row">
+                <div class="col-md-12">
+                    <img src="{{ histogram_url }}" alt="Histograma" style="width:100%;height:auto;">
+                </div>
+            </div>
+        {% endif %}
+
+        {% if show_matrix %}
+        <div class="row mt-4">
+            {% for item in items %}
+                <div class="col-md-1">
+                    {{ item }}
+                </div>
+            {% endfor %}
+        </div>
+        {% else %}
+            <p>No numbers to display.</p>
+        {% endif %}
+    </div>
+
+    <!-- Include Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

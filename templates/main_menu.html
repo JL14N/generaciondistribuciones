@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Ingreso de Datos</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css" />
+    <style>
+        .distribution-column {
+            border-right: 1px solid #ccc;
+            padding-right: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-4">Generador de Números Aleatorios</h1>
+
+        <!-- Form for Distribution Parameters -->
+        <form method="POST" action="/">
+            <div class="row mt-4">
+                <div class="col">
+                    <label for="cantidad">Cantidad de Números Aleatorios:</label>
+                    <input type="number" id="cantidad" name="cantidad" required class="form-control" value="0">
+                </div>
+                <div class="col">
+                    <input type="checkbox" id="visualizar" name="visualizar">
+                    <label for="visualizar">Visualizar valores generados</label>
+                </div>
+            </div>
+
+            <!-- Number of Intervals -->
+            <div class="row mt-4">
+                <div class="col">
+                    <label for="intervalos">Número de Intervalos:</label>
+                    <input type="range" id="intervalos" name="intervalos" min="5" max="20" step="5" value="15" class="form-range">
+                    <div class="d-flex justify-content-between">
+                        <span>5</span>
+                        <span>10</span>
+                        <span>15</span>
+                        <span>20</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Uniform Distribution -->
+            <div class="row mt-4">
+                <div class="col distribution-column align-items-end">
+                    <h2>Distribución Uniforme</h2>
+                    <label for="a">Límite Inferior (a):</label>
+                    <input type="number" id="a" name="a" required class="form-control" value="0">
+
+                    <label for="b">Límite Superior (b):</label>
+                    <input type="number" id="b" name="b" required class="form-control" value="0">
+
+                    <button type="submit" name="distribution" value="uniforme" class="btn btn-primary mt-2">Generar Uniforme</button>
+                </div>
+
+                <!-- Exponential Distribution -->
+                <div class="col distribution-column">
+                    <h2>Distribución Exponencial</h2>
+                    <label for="media">Media:</label>
+                    <input type="number" id="media" name="media" required class="form-control" value="0">
+
+                    <button type="submit" name="distribution" value="exponencial" class="btn btn-primary mt-2">Generar Exponencial</button>
+                </div>
+
+                <!-- Normal Distribution -->
+                <div class="col">
+                    <h2>Distribución Normal</h2>
+                    <label for="media_normal">Media:</label>
+                    <input type="number" id="media_normal" name="media_normal" required class="form-control" value="0">
+
+                    <label for="desviacion">Desviación Estándar:</label>
+                    <input type="number" id="desviacion" name="desviacion" required class="form-control" value="0">
+
+                    <button type="submit" name="distribution" value="normal" class="btn btn-primary mt-2">Generar Normal</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
