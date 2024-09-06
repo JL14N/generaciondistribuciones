@@ -14,12 +14,11 @@ def graficar_histograma(vector, intervalos):
     color = generar_color()
     
     # Create the histogram
-    n, bins, patches = ax.hist(vector, bins=intervalos, edgecolor='black', color=color)
+    n, bins, patches = ax.hist(vector, bins=intervalos, color=color)
     
     # Set labels and title
     ax.set_xlabel('Intervalos')
     ax.set_ylabel('Frecuencia')
-    ax.set_title('Histograma de Frecuencias')
     
     # Annotate bars with their height (frequency)
     for i in range(len(patches)):

@@ -45,7 +45,6 @@ def uniforme():
     hist = graficar_histograma(result, int(request.args.get('intervalos', 10)))
     guardar_imagen(hist, 'histogram_uniforme.png')
     
-    print(result)
     return render_template('distribution.html', distr='uniforme', show_matrix=visualizar, items=result, histogram_url='/static/histogram_uniforme.png')
 
 @app.route('/exponencial')
