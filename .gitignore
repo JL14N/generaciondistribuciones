@@ -1,0 +1,50 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+*.png
+
+# Environment variables
+*.env
+.env
+
+# Flask configuration
+instance/
+config.py
+
+# macOS-specific files
+.DS_Store
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Logs and debugging files
+*.log
+*.sqlite3
+*.db
+
+# Python egg files
+*.egg
+*.egg-info/
+dist/
+build/
+eggs/
+lib/
+
+# Coverage reports
+htmlcov/
+.coverage
+.tox/
+.nox/
+.cache
+
+# pytest
+.pytest_cache/
+
+# IDE settings (optional)
+.vscode/
+.idea/
