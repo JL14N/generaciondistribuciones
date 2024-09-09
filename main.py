@@ -1,8 +1,9 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, request, render_template, redirect, url_for, flash
 from generacion_aleatorios import generar_dist_uniforme, generar_dist_exponencial, generar_dist_normal
 from histograma import graficar_histograma, guardar_imagen
 
 app = Flask(__name__)
+app.secret_key = 'l0r3m1ps8md0l0rs1t4m3t'
 
 @app.route('/', methods=['GET', 'POST'])
 def main_menu():
@@ -16,22 +17,26 @@ def main_menu():
             'intervalos': int(request.form['intervalos']),
         }
 
-        if distribution == 'uniforme':
-            a = float(request.form['a'])
-            b = float(request.form['b'])
-            params.update({'a': a, 'b': b})
-            return redirect(url_for('uniforme', **params))
+        if params['cantidad'] > 1e6:
+            flash('La cantidad de números aleatorios generados es muy grande. Se recomienda un máximo de 1.000.000 (un millón).', 'danger')
+        else:
+            if distribution == 'uniforme':
+                a = float(request.form['a'])
+                b = float(request.form['b'])
+                a > b and flash('Se han invertido los límites superior e inferior', 'info')
+                params.update({'a': a, 'b': b})
+                return redirect(url_for('uniforme', **params))
 
-        elif distribution == 'exponencial':
-            media = float(request.form['media'])
-            params.update({'media': media})
-            return redirect(url_for('exponencial', **params))
+            elif distribution == 'exponencial':
+                media = float(request.form['media'])
+                params.update({'media': media})
+                return redirect(url_for('exponencial', **params))
 
-        elif distribution == 'normal':
-            media_normal = float(request.form['media_normal'])
-            desviacion = float(request.form['desviacion'])
-            params.update({'media_normal': media_normal, 'desviacion': desviacion})
-            return redirect(url_for('normal', **params))
+            elif distribution == 'normal':
+                media_normal = float(request.form['media_normal'])
+                desviacion = float(request.form['desviacion'])
+                params.update({'media_normal': media_normal, 'desviacion': desviacion})
+                return redirect(url_for('normal', **params))
 
     return render_template('main_menu.html')
 
