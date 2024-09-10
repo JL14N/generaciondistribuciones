@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
-import io
-import random
+import io, random, time
 
 
 def generar_color():
@@ -51,7 +50,8 @@ def graficar_histograma(vector, intervalos):
 
 
 def guardar_imagen(buf, filename):
-    # filepath = os.path.join("static", filename)
-    with open("static/" + filename, 'wb') as f:
+    timestamp = int(time.time())
+    filepath = f"static/{timestamp}_{filename}"
+    with open(filepath, 'wb') as f:
         f.write(buf.getvalue())
-    return "static/" + filename
+    return filepath

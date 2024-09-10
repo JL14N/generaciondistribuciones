@@ -48,9 +48,9 @@ def uniforme():
     b = float(request.args.get('b', 0))
     result = generar_dist_uniforme(a, b, cantidad)
     hist = graficar_histograma(result, int(request.args.get('intervalos', 10)))
-    guardar_imagen(hist, 'histogram_uniforme.png')
-    
-    return render_template('distribution.html', distr='uniforme', show_matrix=visualizar, items=result, histogram_url='/static/histogram_uniforme.png')
+    archivo_histograma = guardar_imagen(hist, 'histogram_uniforme.png')
+
+    return render_template('distribution.html', distr='uniforme', show_matrix=visualizar, items=result, histogram_url=archivo_histograma)
 
 @app.route('/exponencial')
 def exponencial():
@@ -59,9 +59,9 @@ def exponencial():
     media = float(request.args.get('media', 0))
     result = generar_dist_exponencial(media, cantidad)
     hist = graficar_histograma(result, int(request.args.get('intervalos', 10)))
-    guardar_imagen(hist, 'histogram_exponencial.png')
+    archivo_histograma = guardar_imagen(hist, 'histogram_exponencial.png')
     
-    return render_template('distribution.html', distr='exponencial', show_matrix=visualizar, items=result, histogram_url='/static/histogram_exponencial.png')
+    return render_template('distribution.html', distr='exponencial', show_matrix=visualizar, items=result, histogram_url=archivo_histograma)
 
 @app.route('/normal')
 def normal():
@@ -71,9 +71,10 @@ def normal():
     desviacion = float(request.args.get('desviacion', 0))
     result = generar_dist_normal(media_normal, desviacion, cantidad)
     hist = graficar_histograma(result, int(request.args.get('intervalos', 10)))
-    guardar_imagen(hist, 'histogram_normal.png')
+    archivo_histograma = guardar_imagen(hist, 'histogram_normal.png')
     
-    return render_template('distribution.html', distr='normal', show_matrix=visualizar, items=result, histogram_url='/static/histogram_normal.png')
+    return render_template('distribution.html', distr='normal', show_matrix=visualizar, items=result, histogram_url=archivo_histograma)
+
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
