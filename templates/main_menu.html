@@ -3,47 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <title>Ingreso de Datos</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.2/css/bootstrap.min.css"/>
     <style>
         .distribution-column {
             border-right: 1px solid #ccc;
             padding-right: 15px;
         }
+
+        .header {
+            background-color: #f0f0f0;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 5px;
+            color: #333;
+            font-size: 2rem;
+            text-align: center;
+        }
+
+        h2 {
+            color: #0056b3;
+            border-bottom: 2px solid #0056b3;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 1.5rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .form-group {
+            max-width: 300px;
+            margin-bottom: 15px;
+        }
+
+        .form-check {
+            margin-bottom: 15px;
+        }
+
     </style>
 </head>
 <body>
-    <div class="container">
-        {% with messages = get_flashed_messages(with_categories=True) %}
-            {% if messages %}
-                {% for category, message in messages %}
-                    <div class="alert alert-{{ category }} mt-3" role="alert">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endif %}
-        {% endwith %}
+<div class="container">
+    {% with messages = get_flashed_messages(with_categories=True) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }} mt-3" role="alert">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
 
-        
-        <h1 class="mt-4">Generador de Números Aleatorios</h1>
 
-        <!-- Form for Distribution Parameters -->
-        <form method="POST" action="/">
-            <div class="row mt-4">
+    <h1 class="header">Generador de Números Aleatorios</h1>
+
+    <!-- Form for Distribution Parameters -->
+    <form method="POST" action="/">
+        <div class="row mt-4">
+            <div class="form-group">
                 <div class="col">
                     <label for="cantidad">Cantidad de Números Aleatorios:</label>
-                    <input type="number" id="cantidad" name="cantidad" required class="form-control" value="0" min="1" max="1000000">
-                </div>
-                <div class="col">
-                    <input type="checkbox" id="visualizar" name="visualizar">
-                    <label for="visualizar">Visualizar valores generados</label>
+                    <input type="number" id="cantidad" name="cantidad" required class="form-control" value="0" min="1"
+                           max="1000000">
                 </div>
             </div>
+            <div class="col">
+                <div class="form-group form-check">
+                    <input type="checkbox" class="form-check-input" id="visualizar" name="visualizar">
+                    <label class="form-check-label" for="visualizar">Visualizar valores generados</label>
+                </div>
+            </div>
+        </div>
 
-            <!-- Number of Intervals -->
-            <div class="row mt-4">
-                <div class="col">
+        <!-- Number of Intervals -->
+        <div class="row mt-4">
+            <div class="col">
+                <div class="form-group">
                     <label for="intervalos">Número de Intervalos:</label>
-                    <input type="range" id="intervalos" name="intervalos" min="5" max="20" step="5" value="5" class="form-range">
+                    <input type="range" id="intervalos" name="intervalos" min="5" max="20" step="5" value="5"
+                           class="form-range">
                     <div class="d-flex justify-content-between">
                         <span>5</span>
                         <span>10</span>
@@ -52,44 +90,63 @@
                     </div>
                 </div>
             </div>
+        </div>
 
-            <div class="row mt-4">
-                <!-- Uniform Distribution -->
-                <div class="col distribution-column align-items-end">
-                    <h2>Distribución Uniforme</h2>
+        <div class="row mt-4">
+            <!-- Uniform Distribution -->
+            <div class="col distribution-column align-items-end">
+                <h2>Distribución Uniforme</h2>
+                <div class="form-group">
                     <label for="a">Límite Inferior (a):</label>
                     <input type="number" id="a" name="a" required class="form-control" value="0" step="0.0001">
+                </div>
 
+                <div class="form-group">
                     <label for="b">Límite Superior (b):</label>
                     <input type="number" id="b" name="b" required class="form-control" value="0" step="0.0001">
-
-                    <button type="submit" name="distribution" value="uniforme" class="btn btn-primary mt-2">Generar Uniforme</button>
                 </div>
 
-                <!-- Exponential Distribution -->
-                <div class="col distribution-column">
-                    <h2>Distribución Exponencial</h2>
-                    <label for="media">Media:</label>
-                    <input type="number" id="media" name="media" required class="form-control" value="0" step="0.0001" min="0">
-
-                    <button type="submit" name="distribution" value="exponencial" class="btn btn-primary mt-2">Generar Exponencial</button>
-                </div>
-
-                <!-- Normal Distribution -->
-                <div class="col">
-                    <h2>Distribución Normal</h2>
-                    <label for="media_normal">Media:</label>
-                    <input type="number" id="media_normal" name="media_normal" required class="form-control" value="0" step="0.0001">
-
-                    <label for="desviacion">Desviación Estándar:</label>
-                    <input type="number" id="desviacion" name="desviacion" required class="form-control" value="0" step="0.0001">
-
-                    <button type="submit" name="distribution" value="normal" class="btn btn-primary mt-2">Generar Normal</button>
-                </div>
+                <button type="submit" name="distribution" value="uniforme" class="btn btn-primary mt-2">Generar
+                    Uniforme
+                </button>
             </div>
-        </form>
-    </div>
 
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+            <!-- Exponential Distribution -->
+            <div class="col distribution-column">
+                <h2>Distribución Exponencial</h2>
+                <div class="form-group">
+                    <label for="media">Media:</label>
+                    <input type="number" id="media" name="media" required class="form-control" value="0" step="0.0001"
+                           min="0">
+                </div>
+
+                <button type="submit" name="distribution" value="exponencial" class="btn btn-primary mt-2">Generar
+                    Exponencial
+                </button>
+            </div>
+
+            <!-- Normal Distribution -->
+            <div class="col">
+                <h2>Distribución Normal</h2>
+                <div class="form-group">
+                    <label for="media_normal">Media:</label>
+                    <input type="number" id="media_normal" name="media_normal" required class="form-control" value="0"
+                           step="0.0001">
+                </div>
+
+                <div class="form-group">
+                    <label for="desviacion">Desviación Estándar:</label>
+                    <input type="number" id="desviacion" name="desviacion" required class="form-control" value="0"
+                           step="0.0001">
+                </div>
+
+                <button type="submit" name="distribution" value="normal" class="btn btn-primary mt-2">Generar Normal
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
