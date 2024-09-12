@@ -30,6 +30,32 @@
         </div>
     {% endif %}
 
+
+    <table class="table table-bordered mt-4 mx-auto">
+        <tbody>
+            <tr>
+                <th>Límite Inferior</th>
+                {% for intervalo in tabla %}
+                    <td>{{ intervalo['Interval Start'] }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <th>Límite Superior</th>
+                {% for intervalo in tabla %}
+                    <td>{{ intervalo['Interval End'] }}</td>
+                {% endfor %}
+            </tr>
+            <tr>
+                <th>Frecuencia</th>
+                {% for intervalo in tabla %}
+                    <td>{{ intervalo['Frequency'] }}</td>
+                {% endfor %}
+            </tr>
+            </tr>
+        </tbody>
+    </table>
+
+
     {% if show_matrix %}
         <div class="row mt-4">
             {% for item in items %}

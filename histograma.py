@@ -46,7 +46,7 @@ def graficar_histograma(vector, intervalos):
     buf.seek(0)
     plt.close(fig)
     
-    return buf
+    return buf, n, bins
 
 
 def guardar_imagen(buf, filename):
@@ -55,3 +55,14 @@ def guardar_imagen(buf, filename):
     with open(filepath, 'wb') as f:
         f.write(buf.getvalue())
     return filepath
+
+
+def tabla_frecuencias(bin_edges, frequencies):
+    table = []
+    for i in range(len(frequencies)):
+        table.append({
+            'Interval Start': round(bin_edges[i], ndigits=4),
+            'Interval End': round(bin_edges[i+1], ndigits=4),
+            'Frequency': int(frequencies[i])
+        })
+    return table
